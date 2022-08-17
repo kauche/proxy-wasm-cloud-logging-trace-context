@@ -1,0 +1,15 @@
+---
+version: "3.8"
+
+services:
+  envoy:
+    image: envoyproxy/envoy:v1.23.0
+    ports:
+      - ${PORT-8080}:8080
+    volumes:
+      - ./test/envoy.yaml:/etc/envoy/envoy.yaml
+      - ./zig-out/bin/proxy-wasm-cloud-logging-trace-context.wasm:/etc/envoy/proxy-wasm-cloud-logging-trace-context.wasm
+    command: /docker-entrypoint.sh envoy -c /etc/envoy/envoy.yaml --log-format '%L%m%d %T.%e %t envoy/%@] [%t][%n]%v' --log-format-escaped
+
+  upstream:
+    image: ghcr.io/110y/echoserver/echoserver:0.0.2
