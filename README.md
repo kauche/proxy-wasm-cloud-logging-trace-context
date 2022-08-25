@@ -1,12 +1,12 @@
 # proxy-wasm-cloud-logging-trace-context
 
-A [proxy-wasm](https://github.com/proxy-wasm/spec) compilant WebAssembly module for making proxies integrate with [Google Cloud Logging](https://cloud.google.com/logging/).
+A [proxy-wasm](https://github.com/proxy-wasm/spec) compliant WebAssembly module for making proxies integrate with [Google Cloud Logging](https://cloud.google.com/logging/).
 
 ## Overview
 
 In order to generate logs associated with [Google Cloud Trace](https://cloud.google.com/trace) for [Google Cloud Logging](https://cloud.google.com/logging/), we need to add a [`logging.googleapis.com/trace` field](https://cloud.google.com/logging/docs/reference/v2/rest/v2/LogEntry#FIELDS.trace) to the log entries.
 
-This [proxy-wasm](https://github.com/proxy-wasm/spec) compliant WebAssembly module help proxies generate logs integrated with Cloud Logging and Cloud Trace by extracting the trace id from the `X-Cloud-Trace-Context` HTTP Header and populating `X-Cloud-Logging-Trace-Context` by using the extracted trace id. The populated `X-Cloud-Logging-Trace-Context` HTTP Header is formatted as `projects/<Your Google Cloud Project ID>/traces/<Trace ID>` and can be used to add a `logging.googleapis.com/trace` filed to logs.
+This [proxy-wasm](https://github.com/proxy-wasm/spec) compliant WebAssembly module helps proxies generate logs integrated with Cloud Logging and Cloud Trace by extracting the trace id from the `X-Cloud-Trace-Context` HTTP Header and populating `X-Cloud-Logging-Trace-Context` by using the extracted trace id. The populated `X-Cloud-Logging-Trace-Context` HTTP Header is formatted as `projects/<Your Google Cloud Project ID>/traces/<Trace ID>` and can be used to add a `logging.googleapis.com/trace` filed to logs.
 
 ## Usage
 
@@ -47,5 +47,4 @@ http_filters:
   - name: envoy.filters.http.router
     typed_config:
       '@type': type.googleapis.com/envoy.extensions.filters.http.router.v3.Router
-
 ```
